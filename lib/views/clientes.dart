@@ -14,15 +14,15 @@ class ClientPage extends StatelessWidget {
         title: Text('Minha tela'),
       ),
       body: ListView.builder(
-        itemCount: 10, // number of items in the list
+        itemCount: 1, // Set this to the number of items you want to display in the listview
         itemBuilder: (context, index) {
-          // retrieve user model for the current item
-          UserModel user =  LoginUser().getsavedUser(context) as UserModel;
+          // Get the saved user information
+          UserModel? userModel = LoginUser().getsavedUser(context) as UserModel?;
 
-          // build the widget for the current item
+          // Return a list tile with the user information
           return ListTile(
-            title: Text(user.name.toString()),
-            subtitle: Text(user.mail.toString()),
+            title: Text(userModel!.name.toString()),
+            subtitle: Text(userModel.mail.toString()),
           );
         },
       ),
