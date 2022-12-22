@@ -1,4 +1,5 @@
 import 'package:contatos/components/container_widget.dart';
+import 'package:contatos/views/clientes.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,7 +19,10 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 50),
            Row(
              children: [
-               ContainerWidget(text: 'Clientes'),
+               InkWell(
+                 onTap: (){Navigator.push(
+                     context, MaterialPageRoute(builder: (context)=>ClientPage()));},
+                   child: ContainerWidget(text: 'Clientes')),
                const SizedBox(width: 10),
                ContainerWidget(text: 'Agendas'),
              ],
