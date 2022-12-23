@@ -14,23 +14,26 @@ UserModel userModel = UserModel();
       appBar: AppBar(
         title: const Text('Minha tela'),
       ),
-      body: FutureBuilder(
-        future: LoginUser().getsavedUser(context),
-        builder: (BuildContext context, AsyncSnapshot<UserModel?> snapshot) {
-          if (snapshot.hasData) {
-            UserModel? user = snapshot.data;
-            return ListView(
-              children: [
-                Text(user!.name.toString()),
-                Text(user.mail.toString()),
-                Text(user.phone.toString()),
-              ],
-            );
-          } else if (snapshot.hasError) {
-            return Text(snapshot.error.toString());
-          }
-          return const CircularProgressIndicator();
-        },
+      body: Center(
+        child: FutureBuilder<List?>(
+          future: LoginUser().getsavedUser(context),
+          builder: (BuildContext context, AsyncSnapshot<List?> snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context,index){
+                  return ListTile(
+                    title: Text(snapshot.data![index].toString()),
+                  );
+                }
+
+              );
+            } else if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            return const CircularProgressIndicator();
+          },
+        ),
       ),
 
 
